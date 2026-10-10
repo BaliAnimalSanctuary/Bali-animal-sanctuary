@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bali Animal Sanctuary — Rescue & Pet Supplies</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="furbabies.css">
+    <link rel="stylesheet" href="donatepay.css">
+
+    <!-- FILTER CSS -->
+    <style>
+        .animal-filter-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin: 0 0 35px;
+            position: relative;
+            z-index: 9990;
+            overflow: visible;
+        }
+
+        .animal-filter-dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 9991;
+        }
+
+        .animal-filter-btn {
+            min-width: 190px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 10px 18px;
+            border: 1px solid rgba(64, 142, 142, 0.15);
+            border-radius: 30px;
+            background: #ffffff;
+            color: #194532;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(31, 67, 50, 0.10);
+            transition: all 0.3s ease;
+        }
+
+        .animal-filter-btn:hover,
+        .animal-filter-dropdown.open .animal-filter-btn {
+            background: #408e8e;
+            color: #ffffff;
+            border-color: #408e8e;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(64, 142, 142, 0.25);
+        }
+
+        .animal-filter-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .animal-filter-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e5f5f3;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .animal-filter-dropdown.open .animal-filter-icon {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .animal-filter-arrow {
+            font-size: 17px;
+            transition: transform 0.25s ease;
+        }
+
+        .animal-filter-dropdown.open .animal-filter-arrow {
+            transform: rotate(180deg);
+        }
+
+        .animal-filter-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            width: 240px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(64, 142, 142, 0.12);
+            border-radius: 18px;
+            box-shadow: 0 18px 45px rgba(31, 67, 50, 0.18);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(-8px);
+            transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+            z-index: 99999;
+        }
+
+        .animal-filter-dropdown.open .animal-filter-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .animal-filter-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px;
+            border: none;
+            border-radius: 13px;
+            background: transparent;
+            color: #194532;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.25s ease;
+        }
+
+        .animal-filter-option:hover,
+        .animal-filter-option.active {
+            background: #eef7f7;
+        }
+
+        .animal-filter-option>span:first-child {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e5f5f3;
+            border-radius: 11px;
+            font-size: 19px;
+        }
+
+        .animal-filter-option strong {
+            display: block;
+            font-size: 0.9rem;
+            color: #194532;
+        }
+
+        .animal-filter-option small {
+            display: block;
+            margin-top: 2px;
+            color: #7b858c;
+            font-size: 0.68rem;
+        }
+
+        .gender-filter-dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 9991;
+        }
+
+        .gender-filter-btn {
+            min-width: 190px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 10px 18px;
+            border: 1px solid rgba(64, 142, 142, 0.15);
+            border-radius: 30px;
+            background: #ffffff;
+            color: #194532;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(31, 67, 50, 0.10);
+            transition: all 0.3s ease;
+        }
+
+        .gender-filter-btn:hover,
+        .gender-filter-dropdown.open .gender-filter-btn {
+            background: #408e8e;
+            color: #ffffff;
+            border-color: #408e8e;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(64, 142, 142, 0.25);
+        }
+
+        .gender-filter-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gender-filter-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e5f5f3;
+            color: #408e8e;
+            font-size: 17px;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .gender-filter-dropdown.open .gender-filter-icon {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+        }
+
+        .gender-filter-arrow {
+            font-size: 17px;
+            transition: transform 0.25s ease;
+        }
+
+        .gender-filter-dropdown.open .gender-filter-arrow {
+            transform: rotate(180deg);
+        }
+
+        .gender-filter-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            width: 240px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(64, 142, 142, 0.12);
+            border-radius: 18px;
+            box-shadow: 0 18px 45px rgba(31, 67, 50, 0.18);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(-8px);
+            transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+            z-index: 99999;
+        }
+
+        .gender-filter-dropdown.open .gender-filter-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .gender-filter-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px;
+            border: none;
+            border-radius: 13px;
+            background: transparent;
+            color: #194532;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.25s ease;
+        }
+
+        .gender-filter-option:hover,
+        .gender-filter-option.active {
+            background: #eef7f7;
+        }
+
+        .gender-option-icon {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e5f5f3;
+            border-radius: 11px;
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .gender-option-icon.male-symbol {
+            color: #408e8e;
+        }
+
+        .gender-option-icon.female-symbol {
+            color: #e76f51;
+        }
+
+        .gender-filter-option strong {
+            display: block;
+            font-size: 0.9rem;
+            color: #194532;
+        }
+
+        .gender-filter-option small {
+            display: block;
+            margin-top: 2px;
+            color: #7b858c;
+            font-size: 0.68rem;
+        }
+
+        .animal-card.filter-hidden {
+            display: none !important;
+        }
+
+        .animal-image {
+            position: relative;
+        }
+
+        .animal-type {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #408e8e;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .animal-type.dog-type {
+            color: #d97845;
+        }
+
+        .gender-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 21px;
+            font-weight: 800;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16);
+            z-index: 10;
+        }
+
+        .gender-badge.male {
+            color: #408e8e;
+        }
+
+        .gender-badge.female {
+            color: #e76f51;
+        }
+
+        @media (max-width: 600px) {
+            .animal-filter-wrap {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 28px;
+            }
+
+            .animal-filter-btn,
+            .gender-filter-btn {
+                min-width: 190px;
+            }
+
+            .animal-filter-menu,
+            .gender-filter-menu {
+                width: min(240px, 85vw);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo logo-image">
+                    <img src="logo century.jpg" alt="IndoPet Logo">
+                    <span class="logo-name"></span>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#babies">Meet Our Babies</a></li>
+                    <li class="looking-dropdown">
+                        <button type="button" class="looking-btn" id="lookingToBtn" aria-expanded="false">
+                            Looking To
+                            <span>⌄</span>
+                        </button>
+                        <div class="looking-menu">
+                            <a href="#adopt">Adopt</a>
+                            <a href="#sponsor">Sponsor</a>
+                            <a href="#foster">Foster</a>
+                            <a href="#donasi">Donate</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="language-wrapper">
+                    <button type="button" class="language-btn" id="languageBtn" aria-label="Choose website language"
+                        aria-expanded="false">
+                        <span class="language-globe">🌐</span>
+                        <span class="language-current">Language</span>
+                        <span class="language-arrow">⌄</span>
+                    </button>
+                    <div class="language-menu" id="languageMenu">
+                        <div class="language-title">🌍 Choose Language</div>
+                        <button type="button" class="language-option" data-lang="id">🇮🇩 Bahasa Indonesia</button>
+                        <button type="button" class="language-option" data-lang="en">🇬🇧 English</button>
+                        <button type="button" class="language-option" data-lang="ja">🇯🇵 日本語</button>
+                        <button type="button" class="language-option" data-lang="ko">🇰🇷 한국어</button>
+                        <button type="button" class="language-option" data-lang="zh-CN">🇨🇳 中文</button>
+                        <button type="button" class="language-option" data-lang="es">🇪🇸 Español</button>
+                        <button type="button" class="language-option" data-lang="fr">🇫🇷 Français</button>
+                        <button type="button" class="language-option" data-lang="de">🇩🇪 Deutsch</button>
+                        <button type="button" class="language-option" data-lang="it">🇮🇹 Italiano</button>
+                        <button type="button" class="language-option" data-lang="pt">🇵🇹 Português</button>
+                        <button type="button" class="language-option" data-lang="ar">🇸🇦 العربية</button>
+                    </div>
+                </div>
+
+                <a href="#contact" class="btn">Contact Us</a>
+
+                <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-label">🐾 RESCUE • LOVE • CARE</div>
+                <h1>
+                    Every Rescue Has
+                    <span>A Story Worth Telling.</span>
+                </h1>
+                <p>
+                    We rescue, care for and protect animals
+                    while giving them the love and dignity
+                    they deserve.
+                </p>
+                <div class="hero-btns">
+                    <a href="#babies" class="hero-main-btn">Meet Our Babies →</a>
+                    <a href="#about" class="hero-outline-btn">Our Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-label">WHO WE ARE</span>
+                <h2>About Us 🐾</h2>
+                <p>A small act of kindness can change an animal's entire life.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-img">
+                    <img src="logo century.jpg" alt="Rescue Animals">
+                </div>
+                <div class="about-text">
+                    <h3>Giving Rescue Animals A Second Chance</h3>
+                    <p>
+                        Bali Animal Sanctuary is dedicated to helping
+                        rescued animals receive proper care, love and protection.
+                    </p>
+                    <p>
+                        Every animal has their own story.
+                        Some were abandoned, some were found injured,
+                        and others simply needed someone to care.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-box">
+                            <h4>70+</h4>
+                            <p>Rescued Animals</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>100%</h4>
+                            <p>Love & Care</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>24/7</h4>
+                            <p>Protection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESCUE ANIMALS -->
+    <section id="babies" class="babies-section">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-label">ANIMAL RESCUE</span>
+                <h2>Our Rescue Animals 🐾</h2>
+                <p>Meet the animals we rescued, cared for and love.</p>
+            </div>
+
+            <!-- FILTER -->
+            <div class="animal-filter-wrap">
+                <div class="animal-filter-dropdown" id="animalFilterDropdown">
+                    <button type="button" class="animal-filter-btn" id="animalFilterBtn" aria-expanded="false"
+                        aria-haspopup="true">
+                        <span class="animal-filter-left">
+                            <span class="animal-filter-icon">🐾</span>
+                            <span id="animalFilterLabel">Animal</span>
+                        </span>
+                        <span class="animal-filter-arrow">⌄</span>
+                    </button>
+                    <div class="animal-filter-menu" id="animalFilterMenu">
+                        <button type="button" class="animal-filter-option active" data-filter="all">
+                            <span>🐾</span>
+                            <span>
+                                <strong>See All</strong>
+                                <small>All rescue animals</small>
+                            </span>
+                        </button>
+                        <button type="button" class="animal-filter-option" data-filter="dog">
+                            <span>🐶</span>
+                            <span>
+                                <strong>Dogs</strong>
+                                <small>Our rescued dogs</small>
+                            </span>
+                        </button>
+                        <button type="button" class="animal-filter-option" data-filter="cat">
+                            <span>🐱</span>
+                            <span>
+                                <strong>Cats</strong>
+                                <small>Our rescued cats</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="gender-filter-dropdown" id="genderFilterDropdown">
+                    <button type="button" class="gender-filter-btn" id="genderFilterBtn" aria-expanded="false"
+                        aria-haspopup="true">
+                        <span class="gender-filter-left">
+                            <span class="gender-filter-icon">⚥</span>
+                            <span id="genderFilterLabel">Gender</span>
+                        </span>
+                        <span class="gender-filter-arrow">⌄</span>
+                    </button>
+                    <div class="gender-filter-menu" id="genderFilterMenu">
+                        <button type="button" class="gender-filter-option active" data-gender-filter="all">
+                            <span class="gender-option-icon">⚥</span>
+                            <span>
+                                <strong>All Gender</strong>
+                                <small>Male & Female</small>
+                            </span>
+                        </button>
+                        <button type="button" class="gender-filter-option" data-gender-filter="male">
+                            <span class="gender-option-icon male-symbol">♂</span>
+                            <span>
+                                <strong>Male</strong>
+                                <small>Male animals</small>
+                            </span>
+                        </button>
+                        <button type="button" class="gender-filter-option" data-gender-filter="female">
+                            <span class="gender-option-icon female-symbol">♀</span>
+                            <span>
+                                <strong>Female</strong>
+                                <small>Female animals</small>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANIMAL CARDS -->
+            <div class="animals-grid" id="animalsGrid">
+
+                <!-- A -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data//Aaron.JPG" alt="Aaron">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Aaron</h3>
+                        <p class="animal-subtitle">The Bright Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male" data-story="acil">
+                    <div class="animal-image">
+                        <img src="Data//Acil.JPG" alt="Acil">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Acil</h3>
+                        <p class="animal-subtitle">The Little Fighter</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female" data-story="agnes">
+                    <div class="animal-image">
+                        <img src="Data//Agnes.JPG" alt="Agnes">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Agnes</h3>
+                        <p class="animal-subtitle">The Sweet Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male" data-story="alexander">
+                    <div class="animal-image">
+                        <img src="Data//Alexander.JPG" alt="Alexander">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Alexander</h3>
+                        <p class="animal-subtitle">The Little Explorer</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data//Alora.JPG" alt="Alora">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Alora</h3>
+                        <p class="animal-subtitle">The Dreamy Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data//Anna.JPG" alt="Anna">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Anna</h3>
+                        <p class="animal-subtitle">The Soft Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- B -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data//Dede.JPG" alt="Bentol">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Bentol</h3>
+                        <p class="animal-subtitle">Dede • The Little One</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male" data-story="bobby">
+                    <div class="animal-image">
+                        <img src="Data/Bobby.JPG" alt="Bobby">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Bobby</h3>
+                        <p class="animal-subtitle">The Curious Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Burberry.jpeg" alt="Burberry">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Burberry</h3>
+                        <p class="animal-subtitle">The Charming Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- C -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Caitlin.JPG" alt="Caitlin">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Caitlin</h3>
+                        <p class="animal-subtitle">The Soft Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Cantik.JPG" alt="Cantik">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Cantik</h3>
+                        <p class="animal-subtitle">The Gentle Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/cathrine.JPG" alt="Catherine">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Catherine</h3>
+                        <p class="animal-subtitle">The Graceful Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Cha-cha.JPG" alt="Cha-cha">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Cha-cha</h3>
+                        <p class="animal-subtitle">Charlize • The Precious Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="dog" data-gender="male" data-story="cincau">
+                    <div class="animal-image">
+                        <img src="Data/Cincau.jpeg" alt="Cincau">
+                        <span class="animal-type dog-type">DOG</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Cincau</h3>
+                        <p class="animal-subtitle">The Strong Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/clara.jpeg" alt="Clara">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Clara</h3>
+                        <p class="animal-subtitle">The Loving Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- D -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male" data-story="daddy">
+                    <div class="animal-image">
+                        <img src="Data/Daddy.JPG" alt="Daddy">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Daddy</h3>
+                        <p class="animal-subtitle">The Calm One</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Dominic.JPG" alt="Dominic">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Dominic</h3>
+                        <p class="animal-subtitle">The Strong Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- E -->
+                <article class="animal-card story-card" data-animal="dog" data-gender="male" data-story="milo">
+                    <div class="animal-image">
+                        <img src="Data/Eddy.jpeg" alt="Eddy">
+                        <span class="animal-type dog-type">DOG</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Eddy</h3>
+                        <p class="animal-subtitle">The Playful Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Elang.JPG" alt="Elang">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Elang</h3>
+                        <p class="animal-subtitle">The Free Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Elsa.JPG" alt="Elsa">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Elsa</h3>
+                        <p class="animal-subtitle">The Elegant Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Elvis.JPG" alt="Elvis">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Elvis</h3>
+                        <p class="animal-subtitle">The Cool Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Enola.JPG" alt="Enola">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Enola</h3>
+                        <p class="animal-subtitle">The Brave Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- F -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Fendi.jpeg" alt="Fendi">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Fendi</h3>
+                        <p class="animal-subtitle">The Little Fighter</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Francis.JPG" alt="Francis">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Francis</h3>
+                        <p class="animal-subtitle">The Kind Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- G -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Gladys.jpeg" alt="Gladys">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Gladys</h3>
+                        <p class="animal-subtitle">The Warm Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- H -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Harvey.JPG" alt="Harvey">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Harvey</h3>
+                        <p class="animal-subtitle">The Friendly Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Honour.JPG" alt="Honour">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Honour</h3>
+                        <p class="animal-subtitle">The Loyal Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- I -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Issac.jpeg" alt="Isaac">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Isaac</h3>
+                        <p class="animal-subtitle">The Quiet Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- J -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Jane.JPG" alt="Jane">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Jane</h3>
+                        <p class="animal-subtitle">The Quiet Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Jason.JPG" alt="Jason">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Jason</h3>
+                        <p class="animal-subtitle">The Playful Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- K -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male" data-story="keanu">
+                    <div class="animal-image">
+                        <img src="Data/Keanu.JPG" alt="Keanu">
+                        <span class="featured">⭐ Featured Rescue</span>
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Keanu</h3>
+                        <p class="animal-subtitle">The Gentle Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="dog" data-gender="female" data-story="keira">
+                    <div class="animal-image">
+                        <img src="Data/Keira.jpeg" alt="Keira">
+                        <span class="animal-type dog-type">DOG</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Keira</h3>
+                        <p class="animal-subtitle">The Brave One</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Kelcee.JPG" alt="Kelcee">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Kelcee</h3>
+                        <p class="animal-subtitle">The Cheerful Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="dog" data-gender="male" data-story="bruno">
+                    <div class="animal-image">
+                        <img src="Data/Kofu.jpeg" alt="Kovu">
+                        <span class="featured">⭐ Featured Rescue</span>
+                        <span class="animal-type dog-type">DOG</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Kovu</h3>
+                        <p class="animal-subtitle">The Loyal Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- L -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Leah.JPG" alt="Leah">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Leah</h3>
+                        <p class="animal-subtitle">The Cheerful Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- M -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Messie.jpg" alt="Maisee">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Maisee</h3>
+                        <p class="animal-subtitle">The Sweet Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female" data-story="angelina">
+                    <div class="animal-image">
+                        <img src="Data/mama.JPG" alt="Mama Angelina">
+                        <span class="featured">⭐ Featured Rescue</span>
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Mama Angelina</h3>
+                        <p class="animal-subtitle">The Loving Mama</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Mariska.JPG" alt="Mariska">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Mariska</h3>
+                        <p class="animal-subtitle">The Lovely Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Marvelous.jpeg" alt="Marvellous">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Marvellous</h3>
+                        <p class="animal-subtitle">The Wonder Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Maxwell.JPG" alt="Maxwell">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Maxwell</h3>
+                        <p class="animal-subtitle">The Strong Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Meiling.JPG" alt="Meiling">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Meiling</h3>
+                        <p class="animal-subtitle">The Gentle Beauty</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Meni.JPG" alt="Meni">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Meni</h3>
+                        <p class="animal-subtitle">The Soft Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male" data-story="michael">
+                    <div class="animal-image">
+                        <img src="Data/Michael.JPG" alt="Michael">
+                        <span class="featured">⭐ Featured Rescue</span>
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Michael</h3>
+                        <p class="animal-subtitle">The Special Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Millie.JPG" alt="Millie">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Millie</h3>
+                        <p class="animal-subtitle">The Soft Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/mimi.jpeg" alt="Mimi">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Mimi</h3>
+                        <p class="animal-subtitle">The Tiny Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- N -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Nanishka.JPG" alt="Nanishka">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Nanishka</h3>
+                        <p class="animal-subtitle">The Precious Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- O -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Oyen.JPG" alt="Oyen">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Oyen</h3>
+                        <p class="animal-subtitle">The Orange Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- Q -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Quennie.JPG" alt="Queenie">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Queenie</h3>
+                        <p class="animal-subtitle">The Royal Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- R -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Roberto.JPG" alt="Roberto">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Roberto</h3>
+                        <p class="animal-subtitle">The Friendly Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Rosa.JPG" alt="Rosa">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Rosa</h3>
+                        <p class="animal-subtitle">The Gentle Rose</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Scarlet (2).JPG" alt="Scarlett">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Scarlett</h3>
+                        <p class="animal-subtitle">The Bold Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Simba.JPG" alt="Simba">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Simba</h3>
+                        <p class="animal-subtitle">The Gentle Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Sofie.JPG" alt="Sophie">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Sophie</h3>
+                        <p class="animal-subtitle">The Beautiful Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Stanley.JPG" alt="Stanley">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Stanley</h3>
+                        <p class="animal-subtitle">The Steady Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="dog" data-gender="female" data-story="sydney">
+                    <div class="animal-image">
+                        <img src="Data/Sydney.jpeg" alt="Sydney">
+                        <span class="animal-type dog-type">DOG</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Sydney</h3>
+                        <p class="animal-subtitle">The Sweet Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- T -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Thomas.JPG" alt="Thomas">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Thomas</h3>
+                        <p class="animal-subtitle">The Calm Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Timmy.jpeg" alt="Timmy">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Timmy</h3>
+                        <p class="animal-subtitle">The Little Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Travis.JPG" alt="Travis">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Travis</h3>
+                        <p class="animal-subtitle">The Cool Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- U -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Umbel.JPG" alt="Umbel">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Umbel</h3>
+                        <p class="animal-subtitle">The Unique Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- V -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Venom.JPG" alt="Venom">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Venom</h3>
+                        <p class="animal-subtitle">The Bold Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- W -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/william.jpeg" alt="William">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>William</h3>
+                        <p class="animal-subtitle">The Noble Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/willy.jpeg" alt="Willy">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Willy</h3>
+                        <p class="animal-subtitle">The Playful Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- X -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Xonic.JPG" alt="Xonic">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Xonic</h3>
+                        <p class="animal-subtitle">The Unique Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- Y -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Yolanda.jpeg" alt="Yolanda">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Yolanda</h3>
+                        <p class="animal-subtitle">The Bright Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <!-- Z -->
+                <article class="animal-card story-card" data-animal="cat" data-gender="female">
+                    <div class="animal-image">
+                        <img src="Data/Zendaya.JPG" alt="Zendaya">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge female">♀</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Zendaya</h3>
+                        <p class="animal-subtitle">The Stylish Girl</p>
+                        <div class="tags"><span>Female</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+                <article class="animal-card story-card" data-animal="cat" data-gender="male">
+                    <div class="animal-image">
+                        <img src="Data/Zeus.JPG" alt="Zeus">
+                        <span class="animal-type">CAT</span>
+                        <span class="gender-badge male">♂</span>
+                    </div>
+                    <div class="animal-info">
+                        <h3>Zeus</h3>
+                        <p class="animal-subtitle">The Mighty Boy</p>
+                        <div class="tags"><span>Male</span><span>Rescued</span><span>Not for Adoption</span></div>
+                        <button type="button" class="story-link">Lihat cerita →</button>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOOKING TO -->
+    <section class="services-section" id="looking-options">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-label">HOW YOU CAN HELP</span>
+                <h2>Looking To Make A Difference? 💚</h2>
+                <p>There are several ways you can become part of an animal's journey.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" id="adopt">
+                    <div class="service-icon">🐾</div>
+                    <h3>Adopt</h3>
+                    <p>Open your home and heart to a rescued animal who is ready for a loving family.</p>
+                </div>
+                <div class="service-card" id="foster">
+                    <div class="service-icon">🏠</div>
+                    <h3>Foster</h3>
+                    <p>Provide a safe temporary home and help a rescue animal feel safe and loved.</p>
+                </div>
+                <div class="service-card" id="sponsor">
+                    <div class="service-icon">💗</div>
+                    <h3>Sponsor</h3>
+                    <p>Support food, medical care and everyday needs of our rescued animals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO -->
+    <section class="ceo-section">
+        <div class="container">
+            <div class="ceo-content">
+                <img src="Data/ceo.jpg" class="ceo-photo" alt="Founder and CEO">
+                <div class="ceo-info">
+                    <span class="role">FOUNDER & CEO</span>
+                    <h2>Our Commitment</h2>
+                    <p>Our mission is to create a safer and kinder environment for every rescued animal.</p>
+                    <p>Behind every rescue is a story, and behind every story is a life worth protecting.</p>
+                    <div class="ceo-quote">
+                        "Every animal deserves a chance to feel safe, loved and cared for."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =====================================================
+     DONASI — BAWA STYLE
+====================================================== -->
+    <section id="donasi" class="bawa-donate">
+        <div class="bawa-donate-inner">
+
+            <!-- KIRI -->
+            <div class="bawa-left">
+                <div class="bawa-left-content">
+                    <p class="bawa-left-label">SAVE LIVES WITH US</p>
+                    <h2>It's not us saving their lives,<br><span>it's you.</span></h2>
+                    <p class="bawa-left-text">
+                        Without you, they would face a life of unchecked misery.
+                        Make a donation today to secure a better future for an animal in need.
+                    </p>
+                    <ul class="bawa-impact-list">
+                        <li>🍖 Makanan harian hewan rescue</li>
+                        <li>💊 Obat & perawatan medis</li>
+                        <li>🏠 Tempat tinggal yang aman</li>
+                        <li>💉 Vaksinasi & sterilisasi</li>
+                    </ul>
+                    <p class="bawa-transparent">100% transparan — setiap rupiah untuk hewan</p>
+                </div>
+            </div>
+
+            <!-- KANAN -->
+            <div class="bawa-right">
+                <div class="bawa-pay-header">
+                    <h3>Payment</h3>
+                    <div class="bawa-steps">
+                        <span class="bawa-dot active"></span>
+                        <span class="bawa-dot"></span>
+                        <span class="bawa-dot"></span>
+                    </div>
+                </div>
+
+                <div class="bawa-tabs">
+                    <button type="button" class="bawa-tab active" data-method="card">
+                        <span class="bawa-tab-icon">💳</span>CARD
+                    </button>
+                    <button type="button" class="bawa-tab" data-method="transfer">
+                        <span class="bawa-tab-icon">🏦</span>TRANSFER
+                    </button>
+                    <button type="button" class="bawa-tab" data-method="paypal">
+                        <span class="bawa-tab-icon">🅿️</span>PAYPAL
+                    </button>
+                </div>
+
+                <div class="bawa-amount-block">
+                    <label class="bawa-field-label">Donation Amount (IDR)</label>
+                    <div class="bawa-amount-row">
+                        <button type="button" class="bawa-amt active" data-amount="150000">150rb</button>
+                        <button type="button" class="bawa-amt" data-amount="250000">250rb</button>
+                        <button type="button" class="bawa-amt" data-amount="550000">500rb</button>
+                    </div>
+                    <div class="bawa-custom-wrap">
+                        <span>Rp</span>
+                        <input type="number" id="bawaCustom" placeholder="Other amount" min="10000" step="1000">
+                    </div>
+                </div>
+
+                <!-- CARD -->
+                <div class="bawa-panel active" id="panelCard">
+                    <a href="#" class="bawa-secure-link" id="bawaPayLink">
+                        Pay securely with <strong>link</strong>
+                    </a>
+                    <div class="bawa-field">
+                        <label>Card Number</label>
+                        <div class="bawa-input-icon">
+                            <span>💳</span>
+                            <input type="text" id="bawaCardNumber" placeholder="Card Number" inputmode="numeric"
+                                autocomplete="cc-number">
+                        </div>
+                    </div>
+                    <div class="bawa-field-row">
+                        <div class="bawa-field">
+                            <label>MM / YY</label>
+                            <div class="bawa-input-icon">
+                                <span>📅</span>
+                                <input type="text" id="bawaExpiry" placeholder="MM / YY" inputmode="numeric"
+                                    autocomplete="cc-exp">
+                            </div>
+                        </div>
+                        <div class="bawa-field">
+                            <label>CVC</label>
+                            <div class="bawa-input-icon">
+                                <span>🔒</span>
+                                <input type="password" id="bawaCvc" placeholder="CVC" inputmode="numeric"
+                                    autocomplete="cc-csc" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bawa-field">
+                        <label>Cardholder Name</label>
+                        <div class="bawa-input-icon">
+                            <span>👤</span>
+                            <input type="text" id="bawaCardName" placeholder="Name on card" autocomplete="cc-name">
+                        </div>
+                    </div>
+                    <label class="bawa-check">
+                        <input type="checkbox" id="bawaFee" checked>
+                        <span>Cover processing fee to help animals more</span>
+                    </label>
+                </div>
+
+                <!-- TRANSFER -->
+                <div class="bawa-panel" id="panelTransfer">
+                    <div class="bawa-bank-box">
+                        <div class="bawa-bank-row">
+                            <span>Bank</span>
+                            <strong>BCA</strong>
+                        </div>
+                        <div class="bawa-bank-row">
+                            <span>Account Name</span>
+                            <strong id="bawaAccName">Bali Animal Sanctuary</strong>
+                        </div>
+                        <div class="bawa-bank-row">
+                            <span>Account Number</span>
+                            <div class="bawa-acc-actions">
+                                <strong id="bawaAccNumber">7611505195</strong>
+                                <button type="button" class="bawa-copy" id="bawaCopyBtn">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="bawa-copy-msg" id="bawaCopyMsg" hidden>✅ Account number copied</p>
+                    <p class="bawa-transfer-hint">Transfer the amount, then tap Donate below to
+                        confirm via WhatsApp.</p>
+                </div>
+
+                <!-- PAYPAL -->
+                <div class="bawa-panel" id="panelPaypal">
+                    <div class="bawa-paypal-box">
+                        <div class="bawa-paypal-logo">PayPal</div>
+                        <p class="bawa-paypal-desc">
+                            Bayar aman dengan akun PayPal atau kartu melalui PayPal.
+                        </p>
+                        <a href="#" class="bawa-paypal-btn" id="bawaPaypalBtn" target="_blank" rel="noopener">
+                            🅿️ Donate with PayPal
+                        </a>
+                        <p class="bawa-paypal-note">
+                            Anda akan diarahkan ke halaman PayPal yang aman.
+                        </p>
+                    </div>
+                </div>
+
+                <button type="button" class="bawa-donate-btn" id="bawaDonateBtn">
+                    🔒 Donate <span id="bawaBtnAmount">Rp150.000</span>
+                </button>
+                <p class="bawa-secure-note">Secure donation · IndoPet Rescue</p>
+
+                <div class="bawa-success" id="bawaSuccess" hidden>
+                    <div class="bawa-success-icon">✓</div>
+                    <h4>Thank you!</h4>
+                    <p>Your donation means the world to our animals.</p>
+                    <button type="button" class="bawa-success-btn" id="bawaSuccessClose">Done</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Bali Animal Sanctuary 🐾</h3>
+                    <p>Rescue. Protect. Love. Every life matters.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#babies">Meet Our Babies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Looking To</h4>
+                    <ul>
+                        <li><a href="#adopt">Adopt</a></li>
+                        <li><a href="#foster">Foster</a></li>
+                        <li><a href="#sponsor">Sponsor</a></li>
+                        <li><a href="#donasi">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links" id="contact">
+                    <h4>Contact Us</h4>
+                    <div class="socials">
+                        <a href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Bali Animal Sanctuary. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- FILTER JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const animalDropdown = document.getElementById("animalFilterDropdown");
+            const animalButton = document.getElementById("animalFilterBtn");
+            const animalLabel = document.getElementById("animalFilterLabel");
+            const animalOptions = document.querySelectorAll(".animal-filter-option");
+
+            const genderDropdown = document.getElementById("genderFilterDropdown");
+            const genderButton = document.getElementById("genderFilterBtn");
+            const genderLabel = document.getElementById("genderFilterLabel");
+            const genderOptions = document.querySelectorAll(".gender-filter-option");
+
+            const cards = document.querySelectorAll(".animal-card[data-animal]");
+
+            let selectedAnimal = "all";
+            let selectedGender = "all";
+
+            function filterAnimals() {
+                cards.forEach(function (card) {
+                    const animal = card.dataset.animal;
+                    const gender = card.dataset.gender;
+                    const animalMatch = selectedAnimal === "all" || animal === selectedAnimal;
+                    const genderMatch = selectedGender === "all" || gender === selectedGender;
+
+                    if (animalMatch && genderMatch) {
+                        card.classList.remove("filter-hidden");
+                    } else {
+                        card.classList.add("filter-hidden");
+                    }
+                });
+            }
+
+            if (animalDropdown && animalButton) {
+                animalButton.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (genderDropdown) {
+                        genderDropdown.classList.remove("open");
+                        if (genderButton) genderButton.setAttribute("aria-expanded", "false");
+                    }
+                    const isOpen = animalDropdown.classList.toggle("open");
+                    animalButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            }
+
+            animalOptions.forEach(function (option) {
+                option.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    selectedAnimal = option.dataset.filter;
+                    const selectedText = option.querySelector("strong");
+                    if (selectedAnimal === "all") {
+                        animalLabel.textContent = "Animal";
+                    } else if (selectedText) {
+                        animalLabel.textContent = selectedText.textContent.trim();
+                    }
+                    animalOptions.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+                    option.classList.add("active");
+                    filterAnimals();
+                    animalDropdown.classList.remove("open");
+                    animalButton.setAttribute("aria-expanded", "false");
+                });
+            });
+
+            if (genderDropdown && genderButton) {
+                genderButton.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (animalDropdown) {
+                        animalDropdown.classList.remove("open");
+                        if (animalButton) animalButton.setAttribute("aria-expanded", "false");
+                    }
+                    const isOpen = genderDropdown.classList.toggle("open");
+                    genderButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            }
+
+            genderOptions.forEach(function (option) {
+                option.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    selectedGender = option.dataset.genderFilter;
+                    const selectedText = option.querySelector("strong");
+                    if (selectedGender === "all") {
+                        genderLabel.textContent = "Gender";
+                    } else if (selectedText) {
+                        genderLabel.textContent = selectedText.textContent.trim();
+                    }
+                    genderOptions.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+                    option.classList.add("active");
+                    filterAnimals();
+                    genderDropdown.classList.remove("open");
+                    genderButton.setAttribute("aria-expanded", "false");
+                });
+            });
+
+            document.addEventListener("click", function (event) {
+                if (animalDropdown && !animalDropdown.contains(event.target)) {
+                    animalDropdown.classList.remove("open");
+                    if (animalButton) animalButton.setAttribute("aria-expanded", "false");
+                }
+                if (genderDropdown && !genderDropdown.contains(event.target)) {
+                    genderDropdown.classList.remove("open");
+                    if (genderButton) genderButton.setAttribute("aria-expanded", "false");
+                }
+            });
+        });
+    </script>
+
+    <script src="furbabies.js"></script>
+    <script src="donate.js"></script>
+
+    <!-- GOOGLE TRANSLATE -->
+    <div id="google_translate_element"></div>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'id,en,ja,ko,zh-CN,es,fr,de,it,pt,ar',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const languageWrapper = document.querySelector(".language-wrapper");
+            const languageBtn = document.getElementById("languageBtn");
+            const languageMenu = document.getElementById("languageMenu");
+            const languageOptions = document.querySelectorAll(".language-option");
+            const currentLanguage = document.querySelector(".language-current");
+
+            if (!languageWrapper || !languageBtn || !languageMenu) return;
+
+            languageBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                const isOpen = languageWrapper.classList.toggle("open");
+                languageBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+
+            languageOptions.forEach(function (option) {
+                option.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const selectedLanguage = option.dataset.lang;
+                    const selectedText = option.textContent.trim();
+                    localStorage.setItem("indopetLanguage", selectedLanguage);
+                    currentLanguage.textContent = selectedText.replace(/^[^\p{L}\p{N}]+/u, "");
+                    languageOptions.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+                    option.classList.add("active");
+                    languageWrapper.classList.remove("open");
+                    languageBtn.setAttribute("aria-expanded", "false");
+                    changeGoogleLanguage(selectedLanguage);
+                });
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!languageWrapper.contains(event.target)) {
+                    languageWrapper.classList.remove("open");
+                    languageBtn.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            const savedLanguage = localStorage.getItem("indopetLanguage");
+            if (savedLanguage) {
+                const savedOption = document.querySelector(`.language-option[data-lang="${savedLanguage}"]`);
+                if (savedOption) {
+                    const savedText = savedOption.textContent.trim();
+                    currentLanguage.textContent = savedText.replace(/^[^\p{L}\p{N}]+/u, "");
+                    savedOption.classList.add("active");
+                }
+            }
+        });
+
+        function changeGoogleLanguage(language) {
+            const tryTranslate = () => {
+                const select = document.querySelector(".goog-te-combo");
+                if (!select) {
+                    setTimeout(tryTranslate, 300);
+                    return;
+                }
+                select.value = language;
+                select.dispatchEvent(new Event("change"));
+            };
+            tryTranslate();
+        }
+    </script>
+
+    <script>
+        (function () {
+            function removeGoogleUI() {
+                document.querySelectorAll('.goog-te-banner-frame, iframe.goog-te-banner-frame').forEach(function (
+                    el) {
+                    el.style.display = 'none';
+                    el.style.visibility = 'hidden';
+                    el.style.height = '0';
+                    el.style.maxHeight = '0';
+                });
+                document.querySelectorAll('.goog-te-gadget, .goog-te-gadget-simple').forEach(function (el) {
+                    el.style.display = 'none';
+                    el.style.visibility = 'hidden';
+                });
+                document.querySelectorAll('.goog-tooltip, .goog-text-highlight').forEach(function (el) {
+                    el.style.display = 'none';
+                    el.style.visibility = 'hidden';
+                });
+                document.body.style.top = '0px';
+                document.documentElement.style.marginTop = '0px';
+            }
+            removeGoogleUI();
+            setTimeout(removeGoogleUI, 300);
+            setTimeout(removeGoogleUI, 800);
+            setTimeout(removeGoogleUI, 1500);
+            setTimeout(removeGoogleUI, 3000);
+            setTimeout(removeGoogleUI, 5000);
+            const observer = new MutationObserver(function () {
+                removeGoogleUI();
+            });
+            observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
